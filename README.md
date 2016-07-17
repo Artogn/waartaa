@@ -21,13 +21,25 @@ sudo dnf install -y libsodium libsodium-devel
 3. Install the required packages  
 ``pip install -r dev_requirements.txt``
 
-4. Run the pyramid development server  
+4. Create authentication token to authenticate via iddev.fedorainfracloud.org  
+``oidc-register --debug https://iddev.fedorainfracloud.org/ http://localhost:6543``
+
+   Replace httplib2's own ca cert file (to adjust as needed):  
+
+   ``
+   cp /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+        ~/.virtualenvs/waartaa/lib/python2.7/site-packages/httplib2/cacerts.txt
+   ``
+
+   Copy the client-id to oidcHelpers.jsx to ``waartaa/client/app/helpers/oidcHelpers.jsx``  
+
+5. Run the pyramid development server  
 ``pserve development.ini``
 
-5. Move to the waartaa client folder in another window  
+6. Move to the waartaa client folder in another window  
 ``cd waartaa/client/``
 
-6. Start the server  
+7. Start the server  
 ``npm start``
 
 ## Contribute
